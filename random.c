@@ -4,11 +4,15 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/stat.h>
 
 int randgen();
 
 void main(){
     printf("\n");
+
+    umask(0000);
+    
     int number[10];
     int j = 0;
     int current;
@@ -25,7 +29,7 @@ void main(){
     printf("\n");
 
     //open rNumbers.txt and write
-    int file = open("rNumbers.txt", O_CREAT | O_RDWR, 0644);
+    int file = open("rNumbers.txt", O_CREAT | O_RDWR, 0666);
     write(file, number, 40);
     //printf("%s\n", strerror(errno));
     close(file);
